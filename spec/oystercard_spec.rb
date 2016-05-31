@@ -1,4 +1,4 @@
-#Oystercard test file
+#Oystercard test file.
 
 describe Oystercard do	
 end
