@@ -3,30 +3,37 @@ require 'oystercard'
 
 describe Oystercard do	
   subject(:oystercard) {described_class.new}	
-  it "has a default balance of 0" do
-    expect(oystercard.balance).to eq 0
+
+  describe "Attributes" do
+
+	it "has a default balance of 0" do
+      expect(oystercard.balance).to eq 0
+ 	end
+
+ 	it "Each oystercard is initialized as not in journey" do
+    expect(oystercard.in_journey?).to be false
+  end
+
+  end
+
+
+  describe "Methods" do
+
+  before do 
+  	oystercard.top_up(Oystercard::MAXIMUM_BALANCE)
   end
 
   it "Tops up the balance with the amount passed to top_up" do
-  	oystercard.top_up(5)
-  	expect(oystercard.balance).to eq 5
+  	expect(oystercard.balance).to eq Oystercard::MAXIMUM_BALANCE
   end
 
   it "Refuses balance over 90" do
-  	maximum = Oystercard::MAXIMUM_BALANCE
-  	oystercard.top_up(maximum)
   	expect {oystercard.top_up(1)}.to raise_error "ERROR: Balance limit is £ #{Oystercard::MAXIMUM_BALANCE}"
   end
 
   it "Deducts a specified fare" do
-  	oystercard.top_up(5)
-  	expect(oystercard.deduct(4)).to eq 1
-  	# COULD DO : expect{ subject.deduct 3}.to change{ subject.balance }.by -3 
+	expect{ subject.deduct 3}.to change{ subject.balance }.by -3 
   end 
-
-  it "Each oystercard is initialized as not in journey" do
-    expect(oystercard.in_journey?).to be false
-  end
 
   it "Touches in at the beginning of journey" do
     oystercard.touch_in
@@ -39,4 +46,12 @@ describe Oystercard do
   	expect(oystercard.in_journey?).to be false
   end
 
+  it "Will not allow touch_in if balance is less than minimum fare" do
+  	oystercard.deduct(Oystercard::MAXIMUM_BALANCE)
+  	minimum = Oystercard::MINIMUM_FARE
+  	oystercard.top_up(minimum - 1)
+  	expect {oystercard.touch_in}.to raise_error "ERROR: Insufficient funds"
+  end
+
+end
 end
