@@ -24,4 +24,19 @@ describe Oystercard do
   	# COULD DO : expect{ subject.deduct 3}.to change{ subject.balance }.by -3 
   end 
 
+  it "Each oystercard is initialized as not in journey" do
+    expect(oystercard.in_journey?).to be false
+  end
+
+  it "Touches in at the beginning of journey" do
+    oystercard.touch_in
+    expect(oystercard.in_journey?).to be true
+  end
+
+  it "Touches out at the end of the journey" do
+  	oystercard.touch_in
+  	oystercard.touch_out
+  	expect(oystercard.in_journey?).to be false
+  end
+
 end
