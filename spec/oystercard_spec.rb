@@ -20,7 +20,8 @@ describe Oystercard do
 
   it "Deducts a specified fare" do
   	oystercard.top_up(5)
-  	expect(oystercard.deduct(4)).to eq 1 
+  	expect(oystercard.deduct(4)).to eq 1
+  	# COULD DO : expect{ subject.deduct 3}.to change{ subject.balance }.by -3 
   end 
 
 end
