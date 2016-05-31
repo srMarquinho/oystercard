@@ -18,5 +18,9 @@ describe Oystercard do
   	expect {oystercard.top_up(1)}.to raise_error "ERROR: Balance limit is £ #{Oystercard::MAXIMUM_BALANCE}"
   end
 
+  it "Deducts a specified fare" do
+  	oystercard.top_up(5)
+  	expect(oystercard.deduct(4)).to eq 1 
+  end 
 
 end

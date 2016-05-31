@@ -6,4 +6,6 @@ describe 'feature test' do
 	my_card.balance 
 	my_card.top_up(5)
 	# my_card.top_up(90)
+	fare = 2 
+	my_card.deduct(fare)
 end 
