@@ -1,14 +1,33 @@
 
+
 require_relative '../lib/oystercard'
 
-describe 'feature test' do
-	# my_card = Oystercard.new
-	# my_card.balance
-	# my_card.top_up(5)
-	# # my_card.top_up(90)
-	# fare = 2
-	# my_card.deduct(fare)
-	# my_card.in_journey?
-	# #my_card.touch_in
+describe 'Feature test' do
+  it 'tops up card' do
+    my_card = Oystercard.new
+    my_card.top_up(5)
+  end
 
-end 
+  # it 'touches in' do
+  #   my_card = Oystercard.new
+  #   my_card.top_up(5)
+  #   my_card.touch_in
+  # end
+
+  it 'remembers the entry station after touch in' do
+    my_card = Oystercard.new
+
+    my_card.top_up(5)
+
+    #my_card.touch_in(:london_bridge)
+
+
+  end
+
+
+
+
+
+
+
+end
