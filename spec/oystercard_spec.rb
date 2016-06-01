@@ -20,7 +20,7 @@ describe Oystercard do
     end
 
     it 'initializes with an empty trip history' do
-      expect(oystercard.trips).to be_empty
+      expect(oystercard.journey_history).to be_empty
     end
   end
 
@@ -84,7 +84,7 @@ end
       first_trip = {:entry_station => entry_station, :exit_station => exit_station}
       oystercard.touch_in(entry_station)
       oystercard.touch_out(exit_station)
-      expect(oystercard.trips[0]).to eq first_trip
+      expect(oystercard.journey_history[0]).to eq first_trip
     end
   end
 end
