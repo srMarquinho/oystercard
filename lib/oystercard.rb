@@ -1,4 +1,4 @@
-#Oystercard file 
+#Oystercard file
 
 
 class Oystercard
@@ -10,16 +10,13 @@ class Oystercard
   def initialize
     @balance = 0
     @user_travelling = false
-  end	
+  end
 
   def top_up(amount)
   	fail "ERROR: Balance limit is £ #{MAXIMUM_BALANCE}" if (balance + amount) > MAXIMUM_BALANCE
   	@balance += amount
-  end   
-
-  def deduct(fare)
-  	@balance -= fare
   end
+
 
   def in_journey?
   	@user_travelling
@@ -31,7 +28,15 @@ class Oystercard
   end
 
   def touch_out
+    deduct(MINIMUM_FARE)
     @user_travelling = false
+  end
+
+  private
+
+  
+  def deduct(fare)
+  	@balance -= fare
   end
 
 end
