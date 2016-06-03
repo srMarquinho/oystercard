@@ -2,8 +2,7 @@ require_relative 'journey'
 
 class JourneyLog
 
-  def initialize #(journey_class = Journey.new)
-    #@journey_class = journey_class
+  def initialize
 	end
 
   def start_log(entry_station)
@@ -23,9 +22,7 @@ class JourneyLog
 
     attr_reader :journey
 
-
   def current_journey
   end
-
 
 end

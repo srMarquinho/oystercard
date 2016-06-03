@@ -20,10 +20,7 @@ class Journey
 
   def finish(exit_station)
     @exit_station = exit_station
-  end
-
-  def complete?
-    !!(@entry_station && @exit_station)
+    fare
   end
 
 end
