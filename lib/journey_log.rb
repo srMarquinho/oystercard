@@ -13,7 +13,8 @@ attr_reader :past_journeys
     no_touch_out if journey
     @journey = Journey.new
     @current_journey << entry_station
-    journey.start(entry_station)
+    fare = journey.start(entry_station)
+    @penalty ? fare : 0
   end
 
   def finish_log(exit_station)
@@ -38,6 +39,7 @@ attr_reader :past_journeys
       @current_journey << nil
       @past_journeys << @current_journey
       @current_journey = []
+      @penalty = true
       @journey = nil
     end
 
