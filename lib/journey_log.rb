@@ -10,22 +10,35 @@ attr_reader :past_journeys
 	end
 
   def start_log(entry_station)
+    no_touch_out if journey
     @journey = Journey.new
     @current_journey << entry_station
     journey.start(entry_station)
   end
 
   def finish_log(exit_station)
-    @journey = Journey.new unless journey
+    no_touch_in unless journey
     @current_journey << exit_station
     @past_journeys <<  @current_journey
-    journey.finish(exit_station)
+    fare = journey.finish(exit_station)
+    journey = nil
+    fare
   end
 
     private
 
     attr_reader :journey
 
+    def no_touch_in
+      @journey = Journey.new
+      @current_journey << nil
+    end
 
+    def no_touch_out
+      @current_journey << nil
+      @past_journeys << @current_journey
+      @current_journey = []
+      @journey = nil
+    end
 
 end
