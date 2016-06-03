@@ -22,7 +22,7 @@ attr_reader :past_journeys
     @current_journey << exit_station
     @past_journeys <<  @current_journey
     fare = journey.finish(exit_station)
-    journey = nil
+    @journey = nil
     fare
   end
 
