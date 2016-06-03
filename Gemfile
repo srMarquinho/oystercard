@@ -1,7 +1,7 @@
 
 source "https://rubygems.org"
 
-ruby '2.3.0'
+ruby ENV['CUSTOM_RUBY_VERSION']
 
 group :development, :test do
   gem "rspec"
