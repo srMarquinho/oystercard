@@ -15,7 +15,6 @@ describe JourneyLog do
       journey_log.start_log(entry_station)
     end
 
-
   end
 
   describe '#finish_log' do
@@ -23,9 +22,16 @@ describe JourneyLog do
       journey_log.start_log(entry_station)
       journey_log.finish_log(exit_station)
     end
+
+    it "returns the penalty fare if no touch in" do
+      expect(journey_log.finish_log(exit_station)).to eq Journey::PENALTY_FARE
+    end
   end
 
-  describe '#journeys' do
-  end
+    it "returns past journeys" do
+      journey_log.start_log("Bank")
+      journey_log.finish_log("Angel")
+      expect(journey_log.past_journeys).to eq [["Bank", "Angel"]]
+    end
 
 end
